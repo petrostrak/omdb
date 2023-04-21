@@ -9,6 +9,8 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
+type envelope map[string]any
+
 func (app *application) readIDParam(r *http.Request) (int64, error) {
 	params := chi.URLParamFromCtx(r.Context(), "id")
 	id, err := strconv.ParseInt(params, 10, 64)
@@ -20,7 +22,7 @@ func (app *application) readIDParam(r *http.Request) (int64, error) {
 }
 
 func (app *application) writeJSON(w http.ResponseWriter, status int, data any, headers http.Header) error {
-	js, err := json.MarshalIndent(data, "", "	")
+	js, err := json.MarshalIndent(data, "", "\t")
 	if err != nil {
 		return err
 	}
