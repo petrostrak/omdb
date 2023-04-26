@@ -1,6 +1,8 @@
 package validator
 
-import "regexp"
+import (
+	"regexp"
+)
 
 var EmailRX = regexp.MustCompile(`^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`)
 
@@ -30,7 +32,7 @@ func (v *Validator) Check(ok bool, key, message string) {
 	}
 }
 
-func (v *Validator) In(value string, list ...string) bool {
+func In(value string, list ...string) bool {
 	for i := range list {
 		if value == list[i] {
 			return true
@@ -40,6 +42,17 @@ func (v *Validator) In(value string, list ...string) bool {
 	return false
 }
 
-func (v *Validator) Match(value string, rx *regexp.Regexp) bool {
+func Match(value string, rx *regexp.Regexp) bool {
 	return rx.MatchString(value)
+}
+
+// Unique returns true if all string values in a slice are unique.
+func Unique(values []string) bool {
+	uniqueValues := make(map[string]bool)
+
+	for _, value := range values {
+		uniqueValues[value] = true
+	}
+
+	return len(values) == len(uniqueValues)
 }
