@@ -68,16 +68,16 @@ func main() {
 	}
 }
 
-func openDB(cgf config) (*sql.DB, error) {
-	db, err := sql.Open("postgres", cgf.db.dsn)
+func openDB(cfg config) (*sql.DB, error) {
+	db, err := sql.Open("postgres", cfg.db.dsn)
 	if err != nil {
 		return nil, err
 	}
 
-	db.SetMaxOpenConns(cgf.db.maxOpenConns)
-	db.SetMaxIdleConns(cgf.db.maxIdleConns)
+	db.SetMaxOpenConns(cfg.db.maxOpenConns)
+	db.SetMaxIdleConns(cfg.db.maxIdleConns)
 
-	duration, err := time.ParseDuration(cgf.db.maxIdleTime)
+	duration, err := time.ParseDuration(cfg.db.maxIdleTime)
 	if err != nil {
 		return nil, err
 	}
