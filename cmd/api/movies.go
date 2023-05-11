@@ -98,7 +98,7 @@ func (app *application) updateMovieHandler(w http.ResponseWriter, r *http.Reques
 	var input struct {
 		Title   string       `json:"title"`
 		Year    int32        `json:"year"`
-		Runtime data.Runtime `json:"runtim"`
+		Runtime data.Runtime `json:"runtime"`
 		Genres  []string     `json:"genres"`
 	}
 
